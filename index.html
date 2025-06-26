@@ -196,7 +196,8 @@
 
     /* Modal para imagen ampliada */
     #modalImagen {
-      display: none;
+      visibility: hidden;
+      opacity: 0;
       position: fixed;
       top: 0; left: 0;
       width: 100vw;
@@ -207,6 +208,12 @@
       align-items: center;
       cursor: pointer;
       z-index: 1000;
+      transition: opacity 0.3s ease;
+    }
+
+    #modalImagen.visible {
+      visibility: visible;
+      opacity: 1;
     }
 
     #modalImagen img {
@@ -302,16 +309,14 @@
     imagenes.forEach(img => {
       img.addEventListener('click', () => {
         imgModal.src = img.dataset.large || img.src;
-        modal.style.display = 'flex';
+        modal.classList.add('visible');
       });
     });
 
-    // Cerrar modal al hacer click en fondo o en la imagen
     modal.addEventListener('click', () => {
-      modal.style.display = 'none';
+      modal.classList.remove('visible');
       imgModal.src = '';
     });
   </script>
 </body>
 </html>
-

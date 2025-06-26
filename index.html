@@ -13,7 +13,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
       text-align: center;
       padding: 20px;
@@ -40,6 +40,7 @@
       height: 200px;
       border-radius: 50%;
       object-fit: cover;
+      object-position: center;
       margin-bottom: 2em;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
       animation: fadeIn 2s ease-in-out forwards;
@@ -64,12 +65,25 @@
       opacity: 0;
     }
 
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .poemas {
       margin-top: 3em;
       padding-top: 2em;
       border-top: 1px solid #333;
-      animation: fadeInUp 3s ease forwards;
-      opacity: 0;
     }
 
     .poemas h2 {
@@ -86,27 +100,77 @@
       font-style: italic;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .galeria {
+      margin-top: 4em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
     }
 
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .galeria h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1em;
+      color: #ffffff;
+    }
+
+    .imagenes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .imagenes img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .imagenes img:hover {
+      transform: scale(1.05);
+    }
+
+    .contacto {
+      margin-top: 4em;
+      padding-top: 2em;
+      border-top: 1px solid #333;
+    }
+
+    .contacto h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1em;
+      color: #ffffff;
+    }
+
+    .botones {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 1em;
+    }
+
+    .botones a {
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #444;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .botones a:hover {
+      background-color: #666;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="winston.jpg.jpg" alt="Foto de Winston" class="foto" />
+    <img src="winston.jpg" alt="Foto de Winston" class="foto" />
     <h1>Winston</h1>
     <p class="lema">Hay personas que no se olvidan, porque uno no quiere.</p>
+
     <div class="poemas">
       <h2>Palabras desde el fondo</h2>
       <p class="texto-poema">
@@ -115,6 +179,23 @@
         se aleja con la mirada<br>
         y se queda por dentro.
       </p>
+    </div>
+
+    <div class="galeria">
+      <h2>Instantes</h2>
+      <div class="imagenes">
+        <img src="foto1.jpg" alt="Foto 1">
+        <img src="foto2.jpg" alt="Foto 2">
+        <img src="foto3.jpg" alt="Foto 3">
+      </div>
+    </div>
+
+    <div class="contacto">
+      <h2>Contacto</h2>
+      <div class="botones">
+        <a href="https://instagram.com/winston.bcn" target="_blank">Instagram</a>
+        <a href="winstonpagina@gmail.com">Correo</a>
+      </div>
     </div>
   </div>
 </body>

@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>soywinston.com</title>
   <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      background-color: #000000;
+      background-color: #000;
       color: #f0f0f0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
@@ -27,6 +32,7 @@
 
     .container {
       max-width: 600px;
+      width: 100%;
       animation: fadeInContainer 2s ease forwards;
       opacity: 0;
     }
@@ -51,7 +57,7 @@
       font-size: 2.5rem;
       margin-bottom: 0.5em;
       font-weight: 700;
-      color: #ffffff;
+      color: #fff;
       animation: fadeInUp 2s ease forwards;
       opacity: 0;
     }
@@ -60,7 +66,7 @@
       font-size: 1.5rem;
       font-style: italic;
       margin-bottom: 2em;
-      color: #bbbbbb;
+      color: #bbb;
       animation: fadeInUp 2.5s ease forwards;
       opacity: 0;
     }
@@ -80,38 +86,35 @@
       }
     }
 
-    .poemas {
+    .poemas, .galeria, .contacto {
       margin-top: 3em;
       padding-top: 2em;
       border-top: 1px solid #333;
+      text-align: left;
     }
 
-    .poemas h2 {
+    .poemas h2,
+    .galeria h2,
+    .contacto h2 {
       font-size: 1.8rem;
       margin-bottom: 1em;
-      color: #ffffff;
+      color: #fff;
+      text-align: center;
     }
 
     .texto-poema {
       font-size: 1.1rem;
       line-height: 1.6;
-      color: #dddddd;
+      color: #ddd;
       white-space: pre-line;
       font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      min-height: 110px; /* para evitar salto de contenido */
     }
 
-    .galeria {
-      margin-top: 4em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
-    }
-
-    .galeria h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1em;
-      color: #ffffff;
-    }
-
+    /* Galería interactiva */
     .imagenes {
       display: flex;
       flex-wrap: wrap;
@@ -119,31 +122,49 @@
       gap: 15px;
     }
 
-    .imagenes img {
+    .imagen-con-texto {
+      position: relative;
+      overflow: hidden;
       width: 150px;
       height: 150px;
-      object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      cursor: pointer;
       transition: transform 0.3s ease;
     }
 
-    .imagenes img:hover {
+    .imagen-con-texto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    .imagen-con-texto:hover {
       transform: scale(1.05);
     }
 
-    .contacto {
-      margin-top: 4em;
-      padding-top: 2em;
-      border-top: 1px solid #333;
+    .texto-hover {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
     }
 
-    .contacto h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1em;
-      color: #ffffff;
+    .imagen-con-texto:hover .texto-hover {
+      opacity: 1;
     }
 
+    /* Contacto y botones */
     .botones {
       display: flex;
       justify-content: center;
@@ -151,17 +172,30 @@
       margin-top: 1em;
     }
 
-    .botones a {
+    .boton-icono {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       text-decoration: none;
-      color: #ffffff;
+      color: #fff;
       background-color: #444;
       padding: 10px 20px;
       border-radius: 30px;
-      transition: background-color 0.3s ease;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
-    .botones a:hover {
+    .boton-icono:hover {
       background-color: #666;
+      transform: scale(1.05);
+    }
+
+    /* Iconos SVG */
+    .icono {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
     }
   </style>
 </head>
@@ -171,33 +205,70 @@
     <h1>Winston</h1>
     <p class="lema">Hay personas que no se olvidan, porque uno no quiere.</p>
 
-    <div class="poemas">
+    <section class="poemas">
       <h2>Palabras desde el fondo</h2>
-      <p class="texto-poema">
-        A veces uno se va<br>
-        sin moverse del sitio,<br>
-        se aleja con la mirada<br>
-        y se queda por dentro.
+      <p class="texto-poema" id="fraseDelDia">
+        <!-- El poema o frase del día aparecerá aquí -->
       </p>
-    </div>
+    </section>
 
-    <div class="galeria">
+    <section class="galeria">
       <h2>Instantes</h2>
       <div class="imagenes">
-        <img src="foto1.jpg" alt="Foto 1">
-        <img src="foto2.jpg" alt="Foto 2">
-        <img src="foto3.jpg" alt="Foto 3">
+        <div class="imagen-con-texto">
+          <img src="foto1.jpg" alt="Foto 1" />
+          <div class="texto-hover">Un momento para recordar</div>
+        </div>
+        <div class="imagen-con-texto">
+          <img src="foto2.jpg" alt="Foto 2" />
+          <div class="texto-hover">Atardecer en la ciudad</div>
+        </div>
+        <div class="imagen-con-texto">
+          <img src="foto3.jpg" alt="Foto 3" />
+          <div class="texto-hover">Bogota</div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="contacto">
+    <section class="contacto">
       <h2>Contacto</h2>
       <div class="botones">
-        <a href="https://instagram.com/winston.bcn" target="_blank">Instagram</a>
-        <a href="winstonpagina@gmail.com">Correo</a>
+        <a class="boton-icono" href="https://instagram.com/winston.bcn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5a3.75 3.75 0 003.75-3.75v-8.5A3.75 3.75 0 0016.25 4h-8.5zm8.8 1.75a.9.9 0 110 1.8.9.9 0 010-1.8zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+          Instagram
+        </a>
+        <a class="boton-icono" href="mailto:winstonpagina@gmail.com" aria-label="Correo">
+          <svg class="icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 5 8-5v10H4z"/></svg>
+          Correo
+        </a>
       </div>
-    </div>
+    </section>
   </div>
+
+  <script>
+    const poemas = [
+      { fecha: '2025-06-26', texto: `A veces uno se va\nsin moverse del sitio,\nse aleja con la mirada\ny se queda por dentro.` },
+      { fecha: '2025-06-27', texto: `En el silencio de mi alma,\nencuentro la voz que guía,\ncomo el viento que no se ve,\npero siempre me acompaña.` },
+      { fecha: '2025-06-28', texto: `Cada día es un nuevo lienzo,\ndonde pinto mis sueños,\ncon colores de esperanza\ny pinceladas de fe.` },
+      { fecha: '2025-06-29', texto: `El corazón es un océano\nque guarda secretos profundos,\nlas olas llevan memorias\ny susurran verdades calladas.` },
+      { fecha: '2025-06-30', texto: `En la quietud del alma,\nla luz encuentra su camino,\ny cada pensamiento vuelve\nuna chispa de destino.` }
+    ];
+
+    function mostrarPoemaDelDia() {
+      const hoy = new Date().toISOString().slice(0, 10);
+      const poemaHoy = poemas.find(p => p.fecha === hoy);
+
+      const contenedor = document.getElementById('fraseDelDia');
+
+      if (poemaHoy) {
+        contenedor.innerHTML = poemaHoy.texto.replace(/\n/g, '<br>');
+      } else {
+        contenedor.innerHTML = "No hay poema para hoy, vuelve pronto.";
+      }
+    }
+
+    mostrarPoemaDelDia();
+  </script>
 </body>
 </html>
 

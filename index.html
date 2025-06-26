@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>soywinston.com</title>
   <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       background-color: #000;
@@ -142,8 +137,9 @@
       display: block;
     }
 
-    .imagen-con-texto:hover {
-      transform: scale(1.05);
+    /* Zoom suave al pasar el cursor */
+    .imagen-con-texto:hover img {
+      transform: scale(1.1);
     }
 
     .texto-hover {
@@ -197,6 +193,29 @@
       height: 20px;
       fill: #fff;
     }
+
+    /* Modal para imagen ampliada */
+    #modalImagen {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    #modalImagen img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      box-shadow: 0 0 20px white;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -216,16 +235,16 @@
       <h2>Instantes</h2>
       <div class="imagenes">
         <div class="imagen-con-texto">
-          <img src="foto1.jpg" alt="Foto 1" />
+          <img src="foto1.jpg" alt="Foto 1" data-large="foto1.jpg" />
           <div class="texto-hover">Un momento para recordar</div>
         </div>
         <div class="imagen-con-texto">
-          <img src="foto2.jpg" alt="Foto 2" />
+          <img src="foto2.jpg" alt="Foto 2" data-large="foto2.jpg" />
           <div class="texto-hover">Atardecer en la ciudad</div>
         </div>
         <div class="imagen-con-texto">
-          <img src="foto3.jpg" alt="Foto 3" />
-          <div class="texto-hover">Bogota</div>
+          <img src="foto3.jpg" alt="Foto 3" data-large="foto3.jpg" />
+          <div class="texto-hover">Risas compartidas</div>
         </div>
       </div>
     </section>
@@ -245,7 +264,13 @@
     </section>
   </div>
 
+  <!-- Modal imagen -->
+  <div id="modalImagen">
+    <img id="imagenModal" src="" alt="Imagen ampliada" />
+  </div>
+
   <script>
+    // Poemas con fecha
     const poemas = [
       { fecha: '2025-06-26', texto: `A veces uno se va\nsin moverse del sitio,\nse aleja con la mirada\ny se queda por dentro.` },
       { fecha: '2025-06-27', texto: `En el silencio de mi alma,\nencuentro la voz que guía,\ncomo el viento que no se ve,\npero siempre me acompaña.` },
@@ -268,6 +293,24 @@
     }
 
     mostrarPoemaDelDia();
+
+    // Modal imagen ampliada
+    const modal = document.getElementById('modalImagen');
+    const imgModal = document.getElementById('imagenModal');
+    const imagenes = document.querySelectorAll('.imagen-con-texto img');
+
+    imagenes.forEach(img => {
+      img.addEventListener('click', () => {
+        imgModal.src = img.dataset.large || img.src;
+        modal.style.display = 'flex';
+      });
+    });
+
+    // Cerrar modal al hacer click en fondo o en la imagen
+    modal.addEventListener('click', () => {
+      modal.style.display = 'none';
+      imgModal.src = '';
+    });
   </script>
 </body>
 </html>

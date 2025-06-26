@@ -1,2 +1,0 @@
-# soywinston
-primera web

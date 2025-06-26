@@ -17,10 +17,33 @@
       min-height: 100vh;
       text-align: center;
       padding: 20px;
+      animation: fadeInBody 1s ease-in forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInBody {
+      to { opacity: 1; }
     }
 
     .container {
-      max-width: 650px;
+      max-width: 600px;
+      animation: fadeInContainer 2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInContainer {
+      to { opacity: 1; }
+    }
+
+    .foto {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 2em;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      animation: fadeIn 2s ease-in-out forwards;
+      opacity: 0;
     }
 
     h1 {
@@ -28,6 +51,8 @@
       margin-bottom: 0.5em;
       font-weight: 700;
       color: #ffffff;
+      animation: fadeInUp 2s ease forwards;
+      opacity: 0;
     }
 
     p.lema {
@@ -35,23 +60,29 @@
       font-style: italic;
       margin-bottom: 2em;
       color: #bbbbbb;
+      animation: fadeInUp 2.5s ease forwards;
+      opacity: 0;
     }
 
-    .foto {
-   width: 250px;
-   height: 250px;
-   border-radius: 55%;
-   object-fit: cover;
-   object-position: center;
-   margin-bottom: 2em;
-   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-  }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
 
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
- </head>
- <body>
+</head>
+<body>
   <div class="container">
-    <img src="winston.jpg.jpg" alt="Foto de Winston" class="foto">
+    <img src="winston.jpg.jpg" alt="Foto de Winston" class="foto" />
     <h1>Winston</h1>
     <p class="lema">Hay personas que no se olvidan, porque uno no quiere.</p>
   </div>

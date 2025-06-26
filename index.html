@@ -18,41 +18,41 @@
       text-align: center;
       padding: 20px;
     }
+
     .container {
       max-width: 600px;
     }
+
     h1 {
       font-size: 2.5rem;
       margin-bottom: 0.5em;
       font-weight: 700;
       color: #ffffff;
     }
+
     p.lema {
       font-size: 1.5rem;
       font-style: italic;
       margin-bottom: 2em;
       color: #bbbbbb;
     }
-    .photo-placeholder {
+
+    .foto {
       width: 200px;
       height: 200px;
-      background-color: #222;
       border-radius: 50%;
-      margin: 0 auto 2em auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 1rem;
-      user-select: none;
+      object-fit: cover;
+      margin-bottom: 2em;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="photo-placeholder">Tu foto aquí</div>
+    <img src="winston.jpg" alt="Foto de Winston" class="foto">
     <h1>Winston</h1>
     <p class="lema">Hay personas que no se olvidan, porque uno no quiere.</p>
   </div>
 </body>
 </html>
+
